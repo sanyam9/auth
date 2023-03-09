@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js",
-    "start": "sequelize-cli db:migrate && node index.js" 
+    "start": "sequelize-cli db:migrate && node index.js"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +16,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "joi": "^17.8.3",
     "jsonwebtoken": "^9.0.0",
     "pg": "^8.10.0",
     "pg-hstore": "^2.3.4",

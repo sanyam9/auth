@@ -4,23 +4,21 @@ const { JWT_SECRET_KEY } = require('../../config');
 const db = require('../models');
 
 const createUser = async (user) => {
-  const { username, password, role } = user;
+  const { email, password } = user;
   const hashedPassword = await bcrypt.hash(password, 10);
   const newUser = {
-    username,
+    email,
     password: hashedPassword,
-    role,
   };
-  const createdUser = await db.User.create(newUser);
+  const createdUser = await db.users.create(newUser);
   return {
-    username: createdUser.dataValues.username,
-    role: createdUser.dataValues.role,
+    email: createdUser.dataValues.email,
   };
 };
 
 const loginUser = async (user) => {
-  const { username, password } = user;
-  let getFromDB = await db.User.findOne({ where: { username } });
+  const { email, password } = user;
+  let getFromDB = await db.users.findOne({ where: { email } });
   getFromDB = getFromDB.dataValues;
 
   if (getFromDB === {} || !getFromDB) {
@@ -30,7 +28,7 @@ const loginUser = async (user) => {
   if (!isPasswordCorrect) {
     throw new Error('WRONG_PASSWORD');
   }
-  const token = jwt.sign({ username, role: getFromDB.role }, JWT_SECRET_KEY, {
+  const token = jwt.sign({ email }, JWT_SECRET_KEY, {
     expiresIn: '1000h',
   });
   return token;

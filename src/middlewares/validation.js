@@ -2,7 +2,10 @@ const joi = require('joi');
 
 const validateLogin = (req, res, next) => {
   const schema = joi.object({
-    username: joi.string().required(),
+    email: joi
+      .string()
+      .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
+      .required(),
     password: joi.string().required(),
   });
   const { error } = schema.validate(req.body);
@@ -12,7 +15,10 @@ const validateLogin = (req, res, next) => {
 
 const validateRegister = (req, res, next) => {
   const schema = joi.object({
-    username: joi.string().required(),
+    email: joi
+      .string()
+      .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
+      .required(),
     password: joi.string().required(),
     confirmPassword: joi.string().required().valid(joi.ref('password')),
   });

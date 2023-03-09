@@ -1,18 +1,18 @@
 module.exports = {
   development: {
-    username: process.env.POSTGRES_USER,
-    password: process.env.POSTGRES_PASSWORD,
-    database: process.env.POSTGRES_DB,
-    host: process.env.POSTGRES_HOST,
+    username: 'postgres',
+    password: 'sanyam1969',
+    database: 'auth',
+    host: 'localhost',
     dialect: 'postgres',
-    port: process.env.POSTGRES_PORT,
+    port: 5433,
   },
   docker: {
-    username: process.env.POSTGRES_USER,
-    password: process.env.POSTGRES_PASSWORD,
-    database: process.env.POSTGRES_DB,
-    host: process.env.POSTGRES_HOST,
+    username: 'postgres',
+    password: 'sanyam1969',
+    database: 'auth',
+    host: 'localhost',
     dialect: 'postgres',
-    port: process.env.POSTGRES_PORT,
+    port: 5433,
   },
 };

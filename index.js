@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { createClient } = require('redis');
+require('dotenv').config();
 const { PORT } = require('./config');
 const redisConfig = {
   socket: {
@@ -8,10 +9,8 @@ const redisConfig = {
     port: process.env.redis_port,
   },
 };
-const router = require('./routes');
+const router = require('./src/routes');
 const app = express();
-
-require('dotenv').config();
 
 global.redisClient = createClient(redisConfig);
 redisClient.connect();
@@ -19,7 +18,7 @@ redisClient.connect();
 app.use(cors());
 app.use(express.json());
 
-app.use('/api', router);
+app.use('/', router);
 
 app.listen(PORT, (error) => {
   if (!error) {
